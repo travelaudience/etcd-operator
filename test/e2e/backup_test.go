@@ -100,15 +100,15 @@ func testEtcdBackupOperatorForS3Backup(t *testing.T) string {
 		if reb.Status.Succeeded {
 			// bucketAndKey[0] holds s3 bucket name.
 			// bucketAndKey[1] holds the s3 object path without the prefixed bucket name.
-			bucketAndKey := strings.SplitN(reb.Status.S3Path, "/", 2)
+			bucketAndKey := strings.SplitN(reb.Status.Path, "/", 2)
 			_, err := s3cli.S3.GetObject(&s3.GetObjectInput{
 				Bucket: aws.String(bucketAndKey[0]),
 				Key:    aws.String(bucketAndKey[1]),
 			})
 			if err != nil {
-				return false, fmt.Errorf("failed to get backup %v from s3 : %v", reb.Status.S3Path, err)
+				return false, fmt.Errorf("failed to get backup %v from s3 : %v", reb.Status.Path, err)
 			}
-			s3Path = reb.Status.S3Path
+			s3Path = reb.Status.Path
 			return true, nil
 		} else if len(reb.Status.Reason) != 0 {
 			return false, fmt.Errorf("backup failed with reason: %v ", reb.Status.Reason)

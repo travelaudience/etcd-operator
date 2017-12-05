@@ -49,6 +49,7 @@ type BackupSpec struct {
 // BackupStorageSource contains the supported backup sources.
 type BackupStorageSource struct {
 	S3 *S3Source `json:"s3,omitempty"`
+	GCS *GCSSource `json:"gcs,omitempty"`
 }
 
 // BackupCRStatus represents the status of the EtcdBackup Custom Resource.
@@ -57,7 +58,6 @@ type BackupCRStatus struct {
 	Succeeded bool `json:"succeeded"`
 	// Reason indicates the reason for any backup related failures.
 	Reason string `json:"Reason,omitempty"`
-	// If S3Source is used to store the backup, this field reports the
-	// S3 path where the backup is saved.
-	S3Path string `json:"s3Path,omitempty"`
+	// Path is the path where the backup is stored.
+	Path string `json:"path,omitempty"`
 }

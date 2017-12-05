@@ -92,6 +92,13 @@ func (r *Restore) serveBackup(w http.ResponseWriter, req *http.Request) error {
 
 		backupReader = reader.NewS3Reader(s3Cli.S3)
 		path = s3RestoreSource.Path
+	case restoreSource.GCS != nil:
+		gcsRestoreSource := restoreSource.GCS
+		if gcsRestoreSource.Path == "" {
+			return errors.New("invalid GCS restore info specified")
+		}
+		backupReader = reader.NewGCSReader()
+		path = gcsRestoreSource.Path
 	default:
 		return errors.New("restore CR must have a restore source specified")
 	}

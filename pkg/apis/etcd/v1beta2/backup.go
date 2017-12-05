@@ -17,11 +17,17 @@ package v1beta2
 type BackupStorageType string
 
 const (
-	BackupStorageTypeS3 = "S3"
+	BackupStorageTypeS3  = "S3"
+	BackupStorageTypeGCS = "GCS"
 
 	AWSSecretCredentialsFileName = "credentials"
 	AWSSecretConfigFileName      = "config"
 )
+
+type GCSSource struct {
+	// BucketName is the name of the GCS bucket where to store backups.
+	BucketName string `json:"bucketName,omitempty"`
+}
 
 // TODO: support per cluster S3 Source configuration.
 type S3Source struct {

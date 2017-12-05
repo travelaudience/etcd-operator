@@ -35,6 +35,28 @@ func NewCluster(genName string, size int) *api.EtcdCluster {
 	}
 }
 
+// NewGCSBackup creates a EtcdBackup object using clusterName.
+func NewGCSBackup(clusterName, bucket string) *api.EtcdBackup {
+	return &api.EtcdBackup{
+		TypeMeta: metav1.TypeMeta{
+			Kind:       api.EtcdBackupResourceKind,
+			APIVersion: api.SchemeGroupVersion.String(),
+		},
+		ObjectMeta: metav1.ObjectMeta{
+			GenerateName: clusterName,
+		},
+		Spec: api.BackupSpec{
+			ClusterName: clusterName,
+			StorageType: api.BackupStorageTypeGCS,
+			BackupStorageSource: api.BackupStorageSource{
+				GCS: &api.GCSSource{
+					BucketName: bucket,
+				},
+			},
+		},
+	}
+}
+
 // NewS3Backup creates a EtcdBackup object using clusterName.
 func NewS3Backup(clusterName, bucket, secret string) *api.EtcdBackup {
 	return &api.EtcdBackup{
@@ -55,6 +77,13 @@ func NewS3Backup(clusterName, bucket, secret string) *api.EtcdBackup {
 				},
 			},
 		},
+	}
+}
+
+// NewGCSRestoreSource returns an GCSRestoreSource with the specified path
+func NewGCSRestoreSource(path string) *api.GCSRestoreSource {
+	return &api.GCSRestoreSource{
+		Path: path,
 	}
 }
 

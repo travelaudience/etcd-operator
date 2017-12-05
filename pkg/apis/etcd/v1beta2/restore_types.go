@@ -50,6 +50,14 @@ type RestoreSpec struct {
 type RestoreSource struct {
 	// S3 tells where on S3 the backup is saved and how to fetch the backup.
 	S3 *S3RestoreSource `json:"s3,omitempty"`
+	// GCS contains restore source information.
+	GCS *GCSRestoreSource `json:"gcs,omitempty"`
+}
+
+
+type GCSRestoreSource struct {
+	// Path is the GCS path where the backup is stored.
+	Path string `json:"path"`
 }
 
 type S3RestoreSource struct {

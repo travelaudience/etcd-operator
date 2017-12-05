@@ -3,7 +3,7 @@
 
 [[projects]]
   name = "cloud.google.com/go"
-  packages = ["compute/metadata"]
+  packages = ["compute/metadata","iam","internal","internal/optional","internal/version","storage"]
   revision = "2d3a6656c17a60b0815b7e06ab0be04eacb6e613"
   version = "v0.16.0"
 
@@ -126,6 +126,12 @@
   name = "github.com/google/gofuzz"
   packages = ["."]
   revision = "24818f796faf91cd76ec7bddd72458fbced7a6c1"
+
+[[projects]]
+  name = "github.com/googleapis/gax-go"
+  packages = ["."]
+  revision = "317e0006254c44a0ac427cc52a0e083ff0b9622f"
+  version = "v2.0.0"
 
 [[projects]]
   name = "github.com/googleapis/gnostic"
@@ -283,6 +289,12 @@
   revision = "6dc17368e09b0e8634d71cac8168d853e869a0c7"
 
 [[projects]]
+  branch = "master"
+  name = "google.golang.org/api"
+  packages = ["gensupport","googleapi","googleapi/internal/uritemplates","googleapi/transport","internal","iterator","option","storage/v1","transport/http"]
+  revision = "b804618854e387dc7fdd9e50496183ddcbb4b120"
+
+[[projects]]
   name = "google.golang.org/appengine"
   packages = [".","internal","internal/app_identity","internal/base","internal/datastore","internal/log","internal/modules","internal/remote_api","internal/urlfetch","urlfetch"]
   revision = "150dc57a1b433e64154302bdc40b6bb8aefa313a"
@@ -291,7 +303,7 @@
 [[projects]]
   branch = "master"
   name = "google.golang.org/genproto"
-  packages = ["googleapis/api/annotations","googleapis/rpc/status"]
+  packages = ["googleapis/api/annotations","googleapis/iam/v1","googleapis/rpc/status"]
   revision = "7f0da29060c682909f650ad8ed4e515bd74fa12a"
 
 [[projects]]
@@ -345,6 +357,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "4b0a9617bcac3daeb8f32478b9b2e03552e655224f03f2a69e7bf8c7033fbe22"
+  inputs-digest = "862ae6178ed680938c696924da81b3474f7be30508aefdc5a0ddab752689adb9"
   solver-name = "gps-cdcl"
   solver-version = 1
