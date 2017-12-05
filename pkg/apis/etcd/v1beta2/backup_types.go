@@ -40,6 +40,9 @@ type EtcdBackup struct {
 type BackupSpec struct {
 	// ClusterName is the etcd cluster name.
 	ClusterName string `json:"clusterName,omitempty"`
+	// OperatorSecret is the secret containing TLS certs used by operator to
+	// talk securely to the etcd cluster.
+	OperatorSecret string `json:"operatorSecret,omitempty"`
 	// StorageType is the etcd backup storage type.
 	StorageType string `json:"storageType"`
 	// BackupStorageSource is the backup storage source.

@@ -19,6 +19,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"time"
 
 	"github.com/coreos/etcd/pkg/transport"
 )
@@ -29,12 +30,17 @@ const (
 	CliCAFile   = "etcd-client-ca.crt"
 )
 
-func NewTLSConfig(certData, keyData, caData []byte) (*tls.Config, error) {
+func NewTLSConfig(certData, keyData, caData []byte, cleanup bool) (*tls.Config, error) {
 	dir, err := ioutil.TempDir("", "etcd-operator-cluster-tls")
 	if err != nil {
 		return nil, err
 	}
-	defer os.RemoveAll(dir)
+	if cleanup {
+		go func() {
+			defer os.RemoveAll(dir)
+			time.Sleep(1 * time.Hour)
+		}()
+	}
 
 	certFile, err := writeFile(dir, CliCertFile, certData)
 	if err != nil {

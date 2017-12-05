@@ -177,11 +177,10 @@ func (r *Restore) prepareSeed(er *api.EtcdRestore) (err error) {
 
 func (r *Restore) createSeedMember(cs api.ClusterSpec, svcAddr, clusterName string, owner metav1.OwnerReference) error {
 	m := &etcdutil.Member{
-		Name:      etcdutil.CreateMemberName(clusterName, 0),
-		Namespace: r.namespace,
-		// TODO: support TLS
-		SecurePeer:   false,
-		SecureClient: false,
+		Name:         etcdutil.CreateMemberName(clusterName, 0),
+		Namespace:    r.namespace,
+		SecurePeer:   cs.TLS != nil,
+		SecureClient: cs.TLS != nil,
 	}
 	ms := etcdutil.NewMemberSet(m)
 	backupURL := backupapi.BackupURLForRestore("http", svcAddr, clusterName)

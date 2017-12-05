@@ -36,7 +36,7 @@ func handleS3(kubecli kubernetes.Interface, s3 *api.S3Source, namespace, cluster
 	}
 	defer cli.Close()
 	// TODO: support TLS.
-	bm := backup.NewBackupManagerFromWriter(kubecli, writer.NewS3Writer(cli.S3), clusterName, namespace)
+	bm := backup.NewBackupManagerFromWriter(kubecli, writer.NewS3Writer(cli.S3), nil, clusterName, namespace)
 	s3Prefix := backupapi.ToS3Prefix(s3.Prefix, namespace, clusterName)
 	fullPath, err := bm.SaveSnapWithPrefix(path.Join(s3.S3Bucket, s3Prefix))
 	if err != nil {

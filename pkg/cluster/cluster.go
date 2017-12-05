@@ -149,7 +149,7 @@ func (c *Cluster) setup() error {
 		if err != nil {
 			return err
 		}
-		c.tlsConfig, err = etcdutil.NewTLSConfig(d.CertData, d.KeyData, d.CAData)
+		c.tlsConfig, err = etcdutil.NewTLSConfig(d.CertData, d.KeyData, d.CAData, false)
 		if err != nil {
 			return err
 		}

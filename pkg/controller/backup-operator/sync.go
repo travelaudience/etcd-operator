@@ -119,7 +119,7 @@ func (b *Backup) handleBackup(spec *api.BackupSpec) (*api.BackupCRStatus, error)
 		}
 		return &api.BackupCRStatus{Path: s3path}, nil
 	case api.BackupStorageTypeGCS:
-		path, err := handleGCS(b.kubecli, spec.GCS, b.namespace, spec.ClusterName)
+		path, err := handleGCS(b.kubecli, b.namespace, spec)
 		if err != nil {
 			return nil, err
 		}
